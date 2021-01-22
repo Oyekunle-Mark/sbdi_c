@@ -22,6 +22,7 @@ services:
       DB_NAME: 'db_api'
       DB_HOSTNAME: main_api_mongo
       DB_PORT: 27017
+      JWT_SECRET: 'do a better job of hiding this please'
     networks:
       - image_repo_network
 
