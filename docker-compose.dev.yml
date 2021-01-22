@@ -2,28 +2,28 @@ version: "3"
 
 services:
   api:
-    container_name: inventory_api
+    container_name: image_repo_api
     build:
       dockerfile: Dockerfile
       context: ./
     ports:
-      - 5000:5000
+      - 7001:7001
     volumes:
       - ".:/home/node/app"
       - "./docker/run.sh:/usr/bin/run.sh"
     restart: on-failure
     depends_on:
-      - mssql
+      - mongo
     environment:
       NODE_ENV: 'development'
-      PORT: 5000
+      PORT: 7001
       DB_USERNAME: 'api_user'
       DB_PASSWORD: 'c3VwZXJfc2VjcmV0Cg=='
       DB_NAME: 'db_api'
       DB_HOSTNAME: main_api_mongo
       DB_PORT: 27017
     networks:
-      - inventory_network
+      - image_repo_network
 
   mongo:
     image: mongo:4.2
@@ -38,7 +38,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD: 'c3VwZXJfc2VjcmV0Cg=='
       - MONGO_INITDB_DATABASE: 'db_api'
     networks:
-      - inventory_network
+      - image_repo_network
 
 networks:
-  inventory_network:
+  image_repo_network:

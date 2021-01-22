@@ -13,7 +13,7 @@ COPY ./docker/run.sh /usr/bin/run.sh
 RUN chmod +x /usr/bin/run.sh
 
 # document the port exposed by server
-EXPOSE 5000
+EXPOSE 7001
 
 # execute start script
 CMD /usr/bin/run.sh
