@@ -8,6 +8,7 @@ import fs from 'fs'
 import path from 'path'
 import { createResponse } from './common'
 import { HttpStatus, ResponseType } from './config'
+import userRoute from './routes/user'
 
 const server = express()
 
@@ -48,6 +49,8 @@ server.get('/api', (_, res: Response) =>
     'Server is up!'
   )
 )
+
+server.use('/api/auth', userRoute)
 
 server.use((_, res: Response) =>
   createResponse(
