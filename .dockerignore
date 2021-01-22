@@ -7,3 +7,4 @@ logs
 docker/.data
 .env
 .env.sample
+/dist
