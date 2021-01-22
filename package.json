@@ -1,0 +1,25 @@
+{
+  "name": "sbdi_c",
+  "version": "1.0.0",
+  "description": "shopify backend developer intern challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oyekunle-Mark/sbdi_c.git"
+  },
+  "keywords": [
+    "image",
+    "repository",
+    "storage",
+    "upload"
+  ],
+  "author": "Chief Oye",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Oyekunle-Mark/sbdi_c/issues"
+  },
+  "homepage": "https://github.com/Oyekunle-Mark/sbdi_c#readme"
+}
