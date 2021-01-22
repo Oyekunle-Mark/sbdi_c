@@ -14,7 +14,8 @@ export const createResponse = (
   res: Response,
   httpStatusCode: number,
   responseType: boolean,
-  data: Record<string, unknown> | string
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  data: object | string
 ): Response => {
   let responseObject: Record<string, unknown>
 

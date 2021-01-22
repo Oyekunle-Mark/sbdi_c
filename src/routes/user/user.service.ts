@@ -9,7 +9,7 @@ import { User, IUser } from './user.model'
  * @param {String}  password
  * @return {Promise<Document>}
  */
-export const saveUser = async (
+export const createUser = async (
   firstName: string,
   lastName: string,
   email: string,

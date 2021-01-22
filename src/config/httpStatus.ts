@@ -8,6 +8,7 @@ export interface IResponseType {
 
 export const HttpStatus: IHttpStatus = {
   StatusOk: 200,
+  StatusCreated: 201,
   StatusBadRequest: 400,
   StatusUnauthorized: 401,
   StatusNotFound: 404,
