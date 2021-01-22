@@ -1,0 +1,10 @@
+node_modules
+logs
+*.log
+.vscode
+.git
+.DS_Store
+docker/.data
+.env
+.env.sample
+/dist
