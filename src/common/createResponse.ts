@@ -14,9 +14,9 @@ export const createResponse = (
   res: Response,
   httpStatusCode: number,
   responseType: boolean,
-  data: Record<string, unknown>
-) => {
-  let responseObject = {}
+  data: Record<string, unknown> | string
+): Response => {
+  let responseObject: Record<string, unknown>
 
   if (responseType) {
     responseObject = {

@@ -1,16 +1,11 @@
-import express from 'express'
+import express, { Response } from 'express'
 import compression from 'compression'
 import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import rTracer from 'cls-rtracer'
-
-// const { createResponse } = require('./common');
-// const {
-//   HttpStatusCode,
-//   ResponseStatus,
-//   ResponseCodes,
-// } = require('./config');
+import { createResponse } from './common'
+import { HttpStatus, ResponseType } from './config'
 
 const server = express()
 
@@ -32,20 +27,22 @@ server.use(helmet())
 server.use(compression())
 server.use(cors())
 
-// server.get('/api', (_, res) => createResponse(
-//   res,
-//   HttpStatusCode.STATUS_OK,
-//   ResponseStatus.SUCCESS,
-//   ResponseCodes.GEN001.CODE,
-//   'Server is up!',
-// ));
-//
-// server.use((_, res) => createResponse(
-//   res,
-//   HttpStatusCode.STATUS_RESOURCE_NOT_FOUND,
-//   ResponseStatus.FAILURE,
-//   ResponseCodes.GEN001.CODE,
-//   'That URL does not exist over here, mate.',
-// ));
+server.get('/api', (_, res: Response) =>
+  createResponse(
+    res,
+    HttpStatus.StatusOk,
+    ResponseType.Success,
+    'Server is up!'
+  )
+)
+
+server.use((_, res: Response) =>
+  createResponse(
+    res,
+    HttpStatus.StatusNotFound,
+    ResponseType.Failure,
+    'Bad URL, mate!'
+  )
+)
 
 export default server
