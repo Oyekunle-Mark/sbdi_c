@@ -1,12 +1,12 @@
-export interface HttpStatusI {
+export interface IHttpStatus {
   [propName: string]: number
 }
 
-export interface ResponseTypeI {
+export interface IResponseType {
   [propName: string]: boolean
 }
 
-export const HttpStatus: HttpStatusI = {
+export const HttpStatus: IHttpStatus = {
   StatusOk: 200,
   StatusBadRequest: 400,
   StatusUnauthorized: 401,
@@ -14,7 +14,7 @@ export const HttpStatus: HttpStatusI = {
   StatusInternalServerError: 500,
 }
 
-export const ResponseType: ResponseTypeI = {
+export const ResponseType: IResponseType = {
   Success: true,
   Failure: false,
 }
