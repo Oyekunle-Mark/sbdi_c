@@ -1,11 +1,11 @@
-import express, { Response } from 'express'
+import server from './server';
 
-const app = express()
+// const { logger } = require('./common');
 
-const port = 5000
+const { PORT } = process.env
 
-app.get('/', (_, res: Response) => {
-  res.status(200).send('Server up.')
-})
+function onListening() {
+  // logger(module).info(`Listening on ${PORT}`);
+}
 
-app.listen(port, () => console.log(`Running on port ${port}`))
+server.listen(PORT, onListening)
