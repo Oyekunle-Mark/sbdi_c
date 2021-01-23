@@ -1,13 +1,28 @@
-import Joi from 'joi'
+import { body, ValidationChain} from 'express-validator'
+import { BaseValidator } from '../../common'
 
-export const registerJoiSchema = Joi.object({
-  firstName: Joi.string().alphanum().min(2).max(30).required(),
-  lastName: Joi.string().alphanum().min(2).max(30).required(),
-  email: Joi.string().email({ minDomainSegments: 2 }).required(),
-  password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
-})
+export default class AuthMiddleware extends BaseValidator {
+  static registerValidationRules(): ValidationChain[] {
+    return [
+      body('firstName')
+        .isLength({ min: 2 })
+        .withMessage('firstName must be minimum of two characters'),
+      body('lastName')
+        .isLength({ min: 2 })
+        .withMessage('lastName must be minimum of two characters'),
+      body('email').isEmail().withMessage('Invalid email format.'),
+      body('password')
+        .isLength({ min: 6 })
+        .withMessage('password be at least 11 characters'),
+    ]
+  }
 
-export const loginJoiSchema = Joi.object({
-  email: Joi.string().email({ minDomainSegments: 2 }).required(),
-  password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required(),
-})
+  static loginValidationRules(): ValidationChain[] {
+    return [
+      body('email').isEmail().withMessage('Invalid email format.'),
+      body('password')
+        .isLength({ min: 6 })
+        .withMessage('password must be at least 11 characters'),
+    ]
+  }
+}

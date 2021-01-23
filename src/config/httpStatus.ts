@@ -12,6 +12,7 @@ export const HttpStatus: IHttpStatus = {
   StatusBadRequest: 400,
   StatusUnauthorized: 401,
   StatusNotFound: 404,
+  StatusUnprocessableEntity: 422,
   StatusInternalServerError: 500,
 }
 

@@ -1,11 +1,20 @@
 import { Router } from 'express'
 import { register, login } from './user.controller'
-import { registerJoiSchema, loginJoiSchema } from './user.validation'
-import { validateJoiSchema } from '../../utils'
+import AuthMiddleware from './user.validation'
 
 const userRoute = Router()
 
-userRoute.post('/register', validateJoiSchema(registerJoiSchema), register)
-userRoute.post('/login', validateJoiSchema(loginJoiSchema), login)
+userRoute.post(
+  '/register',
+  AuthMiddleware.registerValidationRules(),
+  AuthMiddleware.validate,
+  register
+)
+userRoute.post(
+  '/login',
+  AuthMiddleware.loginValidationRules(),
+  AuthMiddleware.validate,
+  login
+)
 
 export default userRoute
