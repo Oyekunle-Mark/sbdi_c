@@ -11,7 +11,7 @@ export class BaseValidator {
   ): Response | void {
     const errors = validationResult(req)
 
-    if (!errors.isEmpty()) return next()
+    if (errors.isEmpty()) return next()
 
     const extractedErrors: string[] = []
 

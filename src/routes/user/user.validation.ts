@@ -13,7 +13,7 @@ export default class AuthMiddleware extends BaseValidator {
       body('email').isEmail().withMessage('Invalid email format.'),
       body('password')
         .isLength({ min: 6 })
-        .withMessage('password be at least 11 characters'),
+        .withMessage('password be at least 6 characters'),
     ]
   }
 
@@ -22,7 +22,7 @@ export default class AuthMiddleware extends BaseValidator {
       body('email').isEmail().withMessage('Invalid email format.'),
       body('password')
         .isLength({ min: 6 })
-        .withMessage('password must be at least 11 characters'),
+        .withMessage('password must be at least 6 characters'),
     ]
   }
 }
