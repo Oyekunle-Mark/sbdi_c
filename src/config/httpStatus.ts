@@ -1,9 +1,11 @@
-export interface IHttpStatus {
-  [propName: string]: number
-}
-
-export interface IResponseType {
-  [propName: string]: boolean
+interface IHttpStatus {
+  StatusOk: number
+  StatusCreated: number
+  StatusBadRequest: number
+  StatusUnauthorized: number
+  StatusNotFound: number
+  StatusUnprocessableEntity: number
+  StatusInternalServerError: number
 }
 
 export const HttpStatus: IHttpStatus = {
@@ -14,6 +16,11 @@ export const HttpStatus: IHttpStatus = {
   StatusNotFound: 404,
   StatusUnprocessableEntity: 422,
   StatusInternalServerError: 500,
+}
+
+interface IResponseType {
+  Success: boolean
+  Failure: boolean
 }
 
 export const ResponseType: IResponseType = {
