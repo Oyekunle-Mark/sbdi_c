@@ -20,7 +20,7 @@ services:
       DB_USERNAME: 'api_user'
       DB_PASSWORD: 'c3VwZXJfc2VjcmV0Cg=='
       DB_NAME: 'db_api'
-      DB_HOSTNAME: main_api_mongo
+      DB_HOSTNAME: image_repo_mongo
       DB_PORT: 27017
       JWT_SECRET: 'do a better job of hiding this please'
     networks:
@@ -28,7 +28,7 @@ services:
 
   mongo:
     image: mongo:4.2
-    container_name: main_api_mongo
+    container_name: image_repo_mongo
     ports:
       - 27017
     volumes:

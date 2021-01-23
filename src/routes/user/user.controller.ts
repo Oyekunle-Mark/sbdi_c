@@ -57,7 +57,11 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
       )
     }
 
-    const token = sign(user)
+    const token = sign({
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      id: user.id,
+    })
 
     return createResponse(res, HttpStatus.StatusOk, ResponseType.Success, {
       token,
