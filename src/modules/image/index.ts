@@ -4,6 +4,8 @@ import {
   getUserTrash,
   findUserImages,
   createImage,
+  clearImages,
+  clearAllUserImages,
 } from './image.controller'
 import ImageValidator from './image.validation'
 import { imageSanitizer } from './fileUploadUtil'
@@ -36,6 +38,16 @@ imageRoute.get(
   ImageValidator.getOneImageValidationRules(),
   ImageValidator.validate,
   findUserImages
+)
+
+imageRoute.delete('/', verifyToken, clearAllUserImages)
+
+imageRoute.put(
+  '/',
+  verifyToken,
+  ImageValidator.clearImagesValidationRules(),
+  ImageValidator.validate,
+  clearImages
 )
 
 export { imageRoute }

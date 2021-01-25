@@ -19,4 +19,10 @@ export default class ImageValidator extends BaseValidator {
         .withMessage('Invalid value provided for image id'),
     ]
   }
+
+  static clearImagesValidationRules(): ValidationChain[] {
+    return [
+      body('imageIds.*').isMongoId().withMessage('Invalid value for imageIds'),
+    ]
+  }
 }

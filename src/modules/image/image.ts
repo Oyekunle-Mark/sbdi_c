@@ -19,3 +19,6 @@ export interface IGetUserImages {
   permission?: ImagePermission
   status?: ImageStatus
 }
+
+export type ImageID = string
+export const fileServerUrl = '/static/'

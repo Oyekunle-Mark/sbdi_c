@@ -1,10 +1,12 @@
 import multer from 'multer'
 import path from 'path'
+import fs from 'fs'
 import crypto from 'crypto'
 import shortid from 'shortid'
 import { Request, Response, NextFunction } from 'express'
 import { createResponse } from '../../common'
 import { HttpStatus, ResponseType } from '../../config'
+import { fileServerUrl } from './image'
 
 shortid.characters(
   '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@'
@@ -97,5 +99,19 @@ export const imageSanitizer = (
       )
 
     next()
+  })
+}
+
+/**
+ * Deletes an invoice file from the invoiceUploads directory
+ * @param fileUrl the image full url
+ * @return {boolean}
+ */
+export const deleteImageFile = (fileUrl: string) => {
+  const result = fileUrl.split(fileServerUrl)
+  const filePath = path.join(__dirname, '../../../src/uploads/', result[1])
+
+  fs.unlink(filePath, (err) => {
+    return !err
   })
 }

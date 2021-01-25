@@ -1,4 +1,10 @@
-import { getImage, getUserImages, saveImage } from './image.service'
+import {
+  getImage,
+  getUserImages,
+  saveImage,
+  deleteAllUserImages,
+  deleteImages,
+} from './image.service'
 import { Request, Response } from 'express'
 import { createResponse } from '../../common'
 import { HttpStatus, ResponseType } from '../../config'
@@ -7,6 +13,7 @@ import {
   IGetUserImages,
   ImagePermission,
   ImageStatus,
+  fileServerUrl,
 } from './image'
 
 export const createImage = async (
@@ -23,7 +30,8 @@ export const createImage = async (
       files: { images },
     } = req
 
-    if (!images) // if images are not provided
+    if (!images)
+      // if images are not provided
       return createResponse(
         res,
         HttpStatus.StatusUnprocessableEntity,
@@ -34,14 +42,13 @@ export const createImage = async (
     const { permission } = req.body
 
     const hostUlr = `${req.protocol}://${req.get('host')}`
-    const filePath = '/static/'
 
     const userImagesObject: ICreateImage[] = images.map(
       (image: { filename: string }) => {
         // form a create image object for each image added for upload
         return {
           owner: userId,
-          imageUrl: `${hostUlr}${filePath}${image.filename}`,
+          imageUrl: `${hostUlr}${fileServerUrl}${image.filename}`,
           permission,
         }
       }
@@ -185,6 +192,65 @@ export const findUserImages = async (
       HttpStatus.StatusInternalServerError,
       ResponseType.Failure,
       `Error getting user images: ${err.message}`
+    )
+  }
+}
+
+export const clearAllUserImages = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      user: { id: userId },
+    } = req
+
+    const result = await deleteAllUserImages(userId)
+
+    return createResponse(
+      res,
+      HttpStatus.StatusOk,
+      ResponseType.Success,
+      result
+    )
+  } catch (err) {
+    return createResponse(
+      res,
+      HttpStatus.StatusInternalServerError,
+      ResponseType.Failure,
+      `Error clearing all user images: ${err.message}`
+    )
+  }
+}
+
+export const clearImages = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      user: { id: userId },
+    } = req
+    const { imageIds } = req.body
+
+    const result = await deleteImages(imageIds, userId)
+
+    return createResponse(
+      res,
+      HttpStatus.StatusOk,
+      ResponseType.Success,
+      result
+    )
+  } catch (err) {
+    return createResponse(
+      res,
+      HttpStatus.StatusInternalServerError,
+      ResponseType.Failure,
+      `Error clearing images: ${err.message}`
     )
   }
 }
