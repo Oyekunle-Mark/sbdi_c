@@ -8,7 +8,7 @@ import fs from 'fs'
 import path from 'path'
 import { createResponse } from './common'
 import { HttpStatus, ResponseType } from './config'
-import { userRoute } from './modules'
+import { userRoute, imageRoute } from './modules'
 
 const server = express()
 
@@ -51,6 +51,7 @@ server.get('/api', (_, res: Response) =>
 )
 
 server.use('/api/auth', userRoute)
+server.use('/api/images', imageRoute)
 
 server.use((_, res: Response) =>
   createResponse(
