@@ -1,30 +1,27 @@
 import { Image, IIMage } from './image.model'
-import { IGetUserImages } from './image'
+import { ICreateImage, IGetUserImages } from './image'
 
 /**
  * Saves an image in the DB
- * @param {String} owner
- * @param {String} imageUrl
- * @param {String} permission
- * @param {String} status
- * @return {Promise<Document>}
+ * @param {ICreateImage[]} images
+ * @return {Promise<Document[]>}
  */
-export const saveImage = async (
-  owner: string,
-  imageUrl: string,
-  permission: string,
-  status: string
-): Promise<IIMage> => {
-  return await Image.create({
-    owner,
-    imageUrl,
-    permission,
-    status,
-  })
+export const saveImage = async (images: ICreateImage[]): Promise<IIMage> => {
+  return await Image.create(images)
 }
 
+/**
+ * Get a single image
+ * @param imageId id of the image
+ * @return Promise<Document>
+ */
 export const getImage = (imageId: string): Promise<IIMage> =>
   Image.findById(imageId)
 
+/**
+ * Get a users images
+ * @param {IGetUserImages} clause
+ * @return {Promise<Document[]>}
+ */
 export const getUserImages = (clause: IGetUserImages): Promise<IIMage> =>
   Image.find(clause)
