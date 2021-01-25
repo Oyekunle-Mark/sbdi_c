@@ -22,7 +22,12 @@ export default class ImageValidator extends BaseValidator {
 
   static clearImagesValidationRules(): ValidationChain[] {
     return [
-      body('imageIds.*').isMongoId().withMessage('Invalid value for imageIds'),
+      body('imageIds')
+        .isArray({ min: 1 })
+        .withMessage('imageIds must be an array'),
+      body('imageIds.*')
+        .isMongoId()
+        .withMessage('imageIds must contain valid image ids'),
     ]
   }
 }

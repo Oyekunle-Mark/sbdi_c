@@ -51,21 +51,15 @@ export const deleteImages = async (
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    if (image.owner.id !== callerId) {
-      reasons.push(`Image ${imageIds} belongs to another user.`)
+    if (image.owner._id.toString() !== callerId) {
+      reasons.push(`Image ${imageId} belongs to another user.`)
       undeleted += 1
     } else {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      Image.deleteOne(imageIds, (err) => {
-        if (err) {
-          reasons.push(err)
-          undeleted += 1
-        } else {
-          deleteImageFile(image.imageUrl)
-          deleted += 1
-        }
-      })
+      await Image.deleteOne({ _id: imageId })
+      deleteImageFile(image.imageUrl)
+      deleted += 1
     }
   }
 
@@ -82,30 +76,22 @@ export const deleteImages = async (
  */
 export const deleteAllUserImages = async (
   ownerId: string
-): Promise<{ deleted: number; undeleted: number; reasons: string[] }> => {
+): Promise<{ deleted: number; reasons: string[] }> => {
   const images = await getUserImages({ owner: ownerId })
-  Image.deleteMany({ owner: ownerId })
+
   let deleted = 0
-  let undeleted = 0
   const reasons: string[] = []
 
   for (const image of images) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    Image.deleteOne(image.id, (err) => {
-      if (err) {
-        reasons.push(err)
-        undeleted += 1
-      } else {
-        deleteImageFile(image.imageUrl)
-        deleted += 1
-      }
-    })
+    await Image.deleteOne({ _id: image._id.toString() })
+    deleteImageFile(image.imageUrl)
+    deleted += 1
   }
 
   return {
     deleted,
-    undeleted,
     reasons,
   }
 }

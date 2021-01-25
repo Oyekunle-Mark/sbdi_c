@@ -40,10 +40,10 @@ imageRoute.get(
   findUserImages
 )
 
-imageRoute.delete('/', verifyToken, clearAllUserImages)
+imageRoute.delete('/user/clear', verifyToken, clearAllUserImages)
 
 imageRoute.put(
-  '/',
+  '/delete',
   verifyToken,
   ImageValidator.clearImagesValidationRules(),
   ImageValidator.validate,
