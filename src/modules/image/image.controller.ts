@@ -23,7 +23,7 @@ export const createImage = async (
       files: { images },
     } = req
 
-    if (!images)
+    if (!images) // if images are not provided
       return createResponse(
         res,
         HttpStatus.StatusUnprocessableEntity,
@@ -38,6 +38,7 @@ export const createImage = async (
 
     const userImagesObject: ICreateImage[] = images.map(
       (image: { filename: string }) => {
+        // form a create image object for each image added for upload
         return {
           owner: userId,
           imageUrl: `${hostUlr}${filePath}${image.filename}`,
@@ -156,6 +157,7 @@ export const findUserImages = async (
 
     let clause: IGetUserImages
 
+    // if it's the images owner
     if (id === userId) {
       clause = {
         owner: id,
