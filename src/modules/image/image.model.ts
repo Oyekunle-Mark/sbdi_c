@@ -1,5 +1,5 @@
 import { Document, Model, model, Schema } from 'mongoose'
-import { ImagePermission, ImageStatus } from '../../config'
+import { ImagePermission, ImageStatus } from './image'
 
 export interface IIMage extends Document {
   owner: string

@@ -1,4 +1,5 @@
 import { Image, IIMage } from './image.model'
+import { IGetUserImages } from './image'
 
 /**
  * Saves an image in the DB
@@ -25,5 +26,5 @@ export const saveImage = async (
 export const getImage = (imageId: string): Promise<IIMage> =>
   Image.findById(imageId)
 
-export const getUserImages = (userId: string): Promise<IIMage> =>
-  Image.find({ owner: userId })
+export const getUserImages = (clause: IGetUserImages): Promise<IIMage> =>
+  Image.find(clause)
