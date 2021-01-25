@@ -4,6 +4,6 @@ export enum ImagePermission {
 }
 
 export enum ImageStatus {
-  Created = 'Created',
+  Active = 'Active',
   Deleted = 'Deleted',
 }

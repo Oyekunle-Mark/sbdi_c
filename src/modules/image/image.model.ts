@@ -29,7 +29,7 @@ const ImageSchema: Schema = new Schema(
     status: {
       type: String,
       enum: Object.values(ImageStatus),
-      default: ImageStatus.Created,
+      default: ImageStatus.Active,
       required: true,
     },
   },
