@@ -12,7 +12,7 @@ shortid.characters(
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, path.join(__dirname, '../../uploads/'))
+    cb(null, path.join(__dirname, '../../../src/uploads'))
   },
   filename(req, file, cb) {
     const {
@@ -72,7 +72,7 @@ export const imageSanitizer = (
   multerConfig(req, res, (err: string | object) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    if (!req.files.images)
+    if (!req.files)
       return createResponse(
         res,
         HttpStatus.StatusUnprocessableEntity,

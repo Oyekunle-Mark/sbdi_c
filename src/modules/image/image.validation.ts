@@ -1,13 +1,14 @@
 import { body, param, ValidationChain } from 'express-validator'
 import { BaseValidator } from '../../common'
-import { ImagePermission, ImageStatus } from './image'
+import { ImagePermission } from './image'
 
 export default class ImageValidator extends BaseValidator {
   static createImageValidationRules(): ValidationChain[] {
     return [
       body('permission')
         .isIn(Object.values(ImagePermission))
-        .withMessage('Invalid value for image permission'),
+        .withMessage('Invalid value for image permission')
+        .optional({ nullable: true, checkFalsy: true }),
     ]
   }
 

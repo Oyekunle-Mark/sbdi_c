@@ -50,6 +50,7 @@ server.get('/api', (_, res: Response) =>
   )
 )
 
+server.use('/static', express.static(path.join(__dirname, '../src/uploads')))
 server.use('/api/auth', userRoute)
 server.use('/api/images', imageRoute)
 

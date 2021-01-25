@@ -23,6 +23,14 @@ export const createImage = async (
       files: { images },
     } = req
 
+    if (!images)
+      return createResponse(
+        res,
+        HttpStatus.StatusUnprocessableEntity,
+        ResponseType.Failure,
+        'Please provide a file to upload'
+      )
+
     const { permission } = req.body
 
     const hostUlr = `${req.protocol}://${req.get('host')}`
@@ -78,7 +86,12 @@ export const getOneImage = async (
         'No image matches that ID'
       )
 
-    if (image.id !== userId && image.permission === ImagePermission.Private)
+    if (
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      image.owner.id !== userId &&
+      image.permission === ImagePermission.Private
+    )
       return createResponse(
         res,
         HttpStatus.StatusUnauthorized,

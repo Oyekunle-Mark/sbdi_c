@@ -14,9 +14,9 @@ const imageRoute = Router()
 imageRoute.post(
   '/',
   verifyToken,
+  imageSanitizer,
   ImageValidator.createImageValidationRules(),
   ImageValidator.validate,
-  imageSanitizer,
   createImage
 )
 

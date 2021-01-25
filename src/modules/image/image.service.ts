@@ -16,7 +16,7 @@ export const saveImage = async (images: ICreateImage[]): Promise<IIMage> => {
  * @return Promise<Document>
  */
 export const getImage = (imageId: string): Promise<IIMage> =>
-  Image.findById(imageId)
+  Image.findById(imageId).populate('owner', 'firstName email')
 
 /**
  * Get a users images
@@ -24,4 +24,4 @@ export const getImage = (imageId: string): Promise<IIMage> =>
  * @return {Promise<Document[]>}
  */
 export const getUserImages = (clause: IGetUserImages): Promise<IIMage> =>
-  Image.find(clause)
+  Image.find(clause).populate('owner', 'firstName email')
