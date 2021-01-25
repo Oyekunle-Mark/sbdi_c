@@ -67,7 +67,7 @@ export const imageSanitizer = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+): Response | void => {
   // eslint-disable-next-line @typescript-eslint/ban-types
   multerConfig(req, res, (err: string | object) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
