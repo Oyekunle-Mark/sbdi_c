@@ -120,3 +120,6 @@ dist
 
 # editor config
 .idea
+
+# image upload folder
+uploads

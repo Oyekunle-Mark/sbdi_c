@@ -8,3 +8,4 @@ docker/.data
 .env
 .env.sample
 /dist
+uploads

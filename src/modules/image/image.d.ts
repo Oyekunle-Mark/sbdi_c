@@ -12,7 +12,6 @@ export interface ICreateImage {
   owner: string
   imageUrl: string
   permission?: ImagePermission
-  status?: ImageStatus
 }
 
 export interface IGetUserImages {

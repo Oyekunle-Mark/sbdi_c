@@ -1,8 +1,60 @@
-import { getImage, getUserImages } from './image.service'
+import { getImage, getUserImages, saveImage } from './image.service'
 import { Request, Response } from 'express'
 import { createResponse } from '../../common'
 import { HttpStatus, ResponseType } from '../../config'
-import { IGetUserImages, ImagePermission, ImageStatus } from './image'
+import {
+  ICreateImage,
+  IGetUserImages,
+  ImagePermission,
+  ImageStatus,
+} from './image'
+
+export const createImage = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      user: { id: userId },
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      files: { images },
+    } = req
+
+    const { permission } = req.body
+
+    const hostUlr = `${req.protocol}://${req.get('host')}`
+    const filePath = '/static/'
+
+    const userImagesObject: ICreateImage[] = images.map(
+      (image: { filename: string }) => {
+        return {
+          owner: userId,
+          imageUrl: `${hostUlr}${filePath}${image.filename}`,
+          permission,
+        }
+      }
+    )
+
+    const newImages = await saveImage(userImagesObject)
+
+    return createResponse(
+      res,
+      HttpStatus.StatusCreated,
+      ResponseType.Success,
+      newImages
+    )
+  } catch (err) {
+    return createResponse(
+      res,
+      HttpStatus.StatusInternalServerError,
+      ResponseType.Failure,
+      `Error creating image: ${err.message}`
+    )
+  }
+}
 
 export const getOneImage = async (
   req: Request,
@@ -34,12 +86,7 @@ export const getOneImage = async (
         "You're not allowed to view this private image"
       )
 
-    return createResponse(
-      res,
-      HttpStatus.StatusCreated,
-      ResponseType.Success,
-      image
-    )
+    return createResponse(res, HttpStatus.StatusOk, ResponseType.Success, image)
   } catch (err) {
     return createResponse(
       res,
@@ -68,7 +115,7 @@ export const getUserTrash = async (
 
     return createResponse(
       res,
-      HttpStatus.StatusCreated,
+      HttpStatus.StatusOk,
       ResponseType.Success,
       images
     )
@@ -113,7 +160,7 @@ export const findUserImages = async (
 
     return createResponse(
       res,
-      HttpStatus.StatusCreated,
+      HttpStatus.StatusOk,
       ResponseType.Success,
       images
     )

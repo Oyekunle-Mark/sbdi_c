@@ -5,15 +5,9 @@ import { ImagePermission, ImageStatus } from './image'
 export default class ImageValidator extends BaseValidator {
   static createImageValidationRules(): ValidationChain[] {
     return [
-      body('owner').isMongoId().withMessage('Invalid owner id provided.'),
       body('permission')
         .isIn(Object.values(ImagePermission))
-        .withMessage('Invalid value for image permission')
-        .optional({ nullable: true, checkFalsy: true }),
-      body('status')
-        .isIn(Object.values(ImageStatus))
-        .withMessage('Invalid value for image status')
-        .optional({ nullable: true, checkFalsy: true }),
+        .withMessage('Invalid value for image permission'),
     ]
   }
 
