@@ -24,7 +24,7 @@ export const register = async (
       res,
       HttpStatus.StatusInternalServerError,
       ResponseType.Failure,
-      err.message
+      `Error registering user: ${err.message}`
     )
   }
 }
@@ -57,7 +57,11 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
       )
     }
 
-    const token = sign(user)
+    const token = sign({
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      id: user.id,
+    })
 
     return createResponse(res, HttpStatus.StatusOk, ResponseType.Success, {
       token,
@@ -67,7 +71,7 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
       res,
       HttpStatus.StatusInternalServerError,
       ResponseType.Failure,
-      err.message
+      `Error logging user in: ${err.message}`
     )
   }
 }
