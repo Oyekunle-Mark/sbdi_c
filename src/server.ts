@@ -8,7 +8,7 @@ import fs from 'fs'
 import path from 'path'
 import { createResponse } from './common'
 import { HttpStatus, ResponseType } from './config'
-import userRoute from './routes/user'
+import { userRoute } from './modules'
 
 const server = express()
 

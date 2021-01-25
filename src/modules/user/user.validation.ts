@@ -1,7 +1,7 @@
 import { body, ValidationChain} from 'express-validator'
 import { BaseValidator } from '../../common'
 
-export default class AuthMiddleware extends BaseValidator {
+export default class UserValidator extends BaseValidator {
   static registerValidationRules(): ValidationChain[] {
     return [
       body('firstName')
