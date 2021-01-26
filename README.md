@@ -12,7 +12,7 @@ Some of this API's functionalities are:
 
 - Clone the project with `git clone https://github.com/Oyekunle-Mark/sbdi_c.git`
 - Change directory into the project directory with `cd sbdi_c`
-- Start the server using Docker with `./start.sh`
+- This step requires that Docker is installed on your computer. Start the server with `./start.sh`
 
 API becomes available at *http://localhost:7001/api*
 
