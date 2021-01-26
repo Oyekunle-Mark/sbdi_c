@@ -1,6 +1,19 @@
 version: "3"
 
 services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: nginx.dockerfile
+    depends_on:
+      - api
+    ports:
+      - "7001:7001"
+    volumes:
+      - "./nginx/log:/var/log/nginx"
+    networks:
+      - image_repo_network
+
   api:
     container_name: image_repo_api
     build:
