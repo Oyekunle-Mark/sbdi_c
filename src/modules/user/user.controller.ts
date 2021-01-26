@@ -4,6 +4,12 @@ import { createResponse } from '../../common'
 import { HttpStatus, ResponseType } from '../../config'
 import { sign } from '../../utils'
 
+/**
+ * Registers a user
+ * @param {Request} req
+ * @param {Response} res
+ * @return {Promise<Response>}
+ */
 export const register = async (
   req: Request,
   res: Response
@@ -29,6 +35,12 @@ export const register = async (
   }
 }
 
+/**
+ * Logs a user in
+ * @param {Request} req
+ * @param {Response} res
+ * @return {Promise<Response>}
+ */
 export const login = async (req: Request, res: Response): Promise<Response> => {
   const { email, password } = req.body
 
