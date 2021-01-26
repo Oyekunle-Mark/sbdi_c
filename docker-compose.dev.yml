@@ -1,13 +1,26 @@
 version: "3"
 
 services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: nginx.dockerfile
+    depends_on:
+      - api
+    ports:
+      - "7001:7001"
+    volumes:
+      - "./nginx/log:/var/log/nginx"
+    networks:
+      - image_repo_network
+
   api:
     container_name: image_repo_api
     build:
       dockerfile: Dockerfile
       context: ./
     ports:
-      - 7001:7001
+      - 5001
     volumes:
       - ".:/home/node/app"
       - "./docker/run.sh:/usr/bin/run.sh"
@@ -15,7 +28,7 @@ services:
       - mongo
     environment:
       NODE_ENV: 'development'
-      PORT: 7001
+      PORT: 5001
       DB_USERNAME: 'api_user'
       DB_PASSWORD: 'c3VwZXJfc2VjcmV0Cg=='
       DB_NAME: 'db_api'

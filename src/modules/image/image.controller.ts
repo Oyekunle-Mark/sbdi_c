@@ -16,6 +16,12 @@ import {
   fileServerUrl,
 } from './image'
 
+/**
+ * Creates an image/images
+ * @param {Request} req
+ * @param {Response} res
+ * @return {Promise<Response>}
+ */
 export const createImage = async (
   req: Request,
   res: Response
@@ -72,6 +78,12 @@ export const createImage = async (
   }
 }
 
+/**
+ * Gets a single image
+ * @param {Request} req
+ * @param {Response} res
+ * @return {Promise<Response>}
+ */
 export const getOneImage = async (
   req: Request,
   res: Response
@@ -118,6 +130,12 @@ export const getOneImage = async (
   }
 }
 
+/**
+ * Gets images marked as deleted for a user
+ * @param {Request} req
+ * @param {Response} res
+ * @return {Promise<Response>}
+ */
 export const getUserTrash = async (
   req: Request,
   res: Response
@@ -150,6 +168,12 @@ export const getUserTrash = async (
   }
 }
 
+/**
+ * Gets all active user images
+ * @param {Request} req
+ * @param {Response} res
+ * @return {Promise<Response>}
+ */
 export const findUserImages = async (
   req: Request,
   res: Response
@@ -196,6 +220,12 @@ export const findUserImages = async (
   }
 }
 
+/**
+ * Deletes all user images
+ * @param {Request} req
+ * @param {Response} res
+ * @return {Promise<Response>}
+ */
 export const clearAllUserImages = async (
   req: Request,
   res: Response
@@ -225,6 +255,12 @@ export const clearAllUserImages = async (
   }
 }
 
+/**
+ * Bulk deletes images
+ * @param {Request} req
+ * @param {Response} res
+ * @return {Promise<Response>}
+ */
 export const clearImages = async (
   req: Request,
   res: Response

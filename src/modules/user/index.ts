@@ -8,6 +8,7 @@ userRoute.post(
   '/register',
   UserValidator.registerValidationRules(),
   UserValidator.validate,
+  UserValidator.checkExistingEmail,
   register
 )
 

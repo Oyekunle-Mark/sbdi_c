@@ -76,11 +76,10 @@ export const deleteImages = async (
  */
 export const deleteAllUserImages = async (
   ownerId: string
-): Promise<{ deleted: number; reasons: string[] }> => {
+): Promise<{ deleted: number }> => {
   const images = await getUserImages({ owner: ownerId })
 
   let deleted = 0
-  const reasons: string[] = []
 
   for (const image of images) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -92,6 +91,5 @@ export const deleteAllUserImages = async (
 
   return {
     deleted,
-    reasons,
   }
 }

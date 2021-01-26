@@ -8,8 +8,6 @@ function onListening() {
   logger(module).info(`Listening on ${PORT}`)
 }
 
-// server.listen(5000, onListening)
-
 createMongoConnection()
   .then(() => {
     server.listen(PORT, onListening)

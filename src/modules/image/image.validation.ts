@@ -7,7 +7,11 @@ export default class ImageValidator extends BaseValidator {
     return [
       body('permission')
         .isIn(Object.values(ImagePermission))
-        .withMessage('Invalid value for image permission')
+        .withMessage(
+          `Invalid value for image permission. Can only be one of ${Object.values(
+            ImagePermission
+          )}`
+        )
         .optional({ nullable: true, checkFalsy: true }),
     ]
   }
