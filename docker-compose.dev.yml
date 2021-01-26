@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
       context: ./
     ports:
-      - 7001:7001
+      - 5001
     volumes:
       - ".:/home/node/app"
       - "./docker/run.sh:/usr/bin/run.sh"
@@ -15,7 +15,7 @@ services:
       - mongo
     environment:
       NODE_ENV: 'development'
-      PORT: 7001
+      PORT: 5001
       DB_USERNAME: 'api_user'
       DB_PASSWORD: 'c3VwZXJfc2VjcmV0Cg=='
       DB_NAME: 'db_api'
