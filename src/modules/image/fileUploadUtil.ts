@@ -57,7 +57,7 @@ const multerConfig = multer({
     fileSize: 100000000, // 100MB TODO: ensure file fits
   },
   fileFilter,
-}).fields([{ name: 'images', maxCount: 20 }]) // TODO: ensure file count is enough
+}).fields([{ name: 'images', maxCount: 100 }]) // TODO: ensure file count is enough
 
 /**
  * The multer middleware to handle file upload, validation and formatting
